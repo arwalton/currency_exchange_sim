@@ -3,7 +3,7 @@
 #pragma once
 #include <string>
 
-enum class OrderBookType{bid, ask};
+enum class OrderBookType{bid, ask, unknown};
 
 class OrderBookEntry{
     public:
@@ -13,6 +13,8 @@ class OrderBookEntry{
             std::string _timestamp,
             std::string _product,
             OrderBookType _orderType);
+
+        static OrderBookType stringToOrderBookType(std::string s);
         
         ~OrderBookEntry();
 
