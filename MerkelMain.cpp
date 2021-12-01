@@ -16,19 +16,13 @@ MerkelMain::~MerkelMain()
 
 /** Call this to start the simulation */
 void MerkelMain::init(){
-    loadOrderBook();
     int input;
+    currentTime = orderBook.getEarliestTime();
     while(isRunning){
         printMenu();
         input = getUserOption();
         processUserOption(input);
     }
-}
-
-void MerkelMain::loadOrderBook(){
-    
-    orders = CSVReader::readCSV("20200317.csv");
-        
 }
 
 void MerkelMain::printMenu(){
@@ -47,6 +41,8 @@ void MerkelMain::printMenu(){
     // 7 exit
     std::cout << "7: Exit the program" << std::endl;
 
+    std::cout << "Current time is: " << currentTime << std::endl;
+
     std::cout << "==================" << std::endl;
 }
 
@@ -63,20 +59,33 @@ void MerkelMain::printHelp(){
 }
 
 void MerkelMain::printExchangeStats(){
-    std::cout << "OrderBook contains : " << orders.size() << " entries." << std::endl;
-    unsigned int bids = 0;
-    unsigned int asks = 0;
-    for (OrderBookEntry& e : orders){
-        if(e.orderType == OrderBookType::ask){
-            asks++;
-        }
-        if(e.orderType == OrderBookType::bid){
-            bids++;
-        }
-    }
 
-    std::cout << "OrderBook asks: " << asks << std::endl;
-    std::cout << "OrderBook bids: " << bids << std::endl;
+    for(std::string const& p : orderBook.getKnownProducts()){
+        std::cout << "Product: " << p << std::endl;
+        std::vector<OrderBookEntry> entries = 
+            orderBook.getOrders(OrderBookType::ask, p, currentTime);
+        std::cout << "Asks seen: " << entries.size() << std::endl;
+
+        std::cout << "Max ask: " << OrderBook::getHighPrice(entries) << std::endl;
+        std::cout << "Min ask: " << OrderBook::getLowPrice(entries) << std::endl;
+        std::cout << "Mean price per unit: " << OrderBook::getMeanPPU(entries) << std::endl;
+        std::cout << "Standard Deviation: " << OrderBook::getStDevPPU(entries) << std::endl;
+
+    }
+    // std::cout << "OrderBook contains : " << orders.size() << " entries." << std::endl;
+    // unsigned int bids = 0;
+    // unsigned int asks = 0;
+    // for (OrderBookEntry& e : orders){
+    //     if(e.orderType == OrderBookType::ask){
+    //         asks++;
+    //     }
+    //     if(e.orderType == OrderBookType::bid){
+    //         bids++;
+    //     }
+    // }
+
+    // std::cout << "OrderBook asks: " << asks << std::endl;
+    // std::cout << "OrderBook bids: " << bids << std::endl;
 
 }
 
@@ -94,6 +103,7 @@ void MerkelMain::printWallet(){
 
 void MerkelMain::advanceTimeframe(){
     std::cout << "Going to next timeframe" << std::endl;
+    currentTime = orderBook.getNextTime(currentTime);
 }
 
 void MerkelMain::printExitMessage(){

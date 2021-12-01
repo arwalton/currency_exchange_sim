@@ -3,14 +3,14 @@
 #pragma once
 #include <vector>
 #include "OrderBookEntry.h"
+#include "OrderBook.h"
 	
 class MerkelMain  
 {
 	private:
 		bool isRunning;
-		std::vector<OrderBookEntry> orders;
+		OrderBook orderBook{"20200317.csv"};
 
-		void loadOrderBook();
 		void printMenu();
 		int getUserOption();
 		void printHelp();
@@ -22,6 +22,8 @@ class MerkelMain
 		void printExitMessage();
 		void handleBadInput();
 		void processUserOption(int userOption);
+
+		std::string currentTime;
 
 	public:
 
