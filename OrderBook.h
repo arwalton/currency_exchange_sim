@@ -94,5 +94,12 @@ class OrderBook
 		 * @return double representing the standard deviation per unit
 		 */
 		static double getStDevPPU(std::vector<OrderBookEntry>& orders);
+
+		/**
+		 * @brief Matches asks and bids and returns the resulting vector of sales
+		 * 
+		 * @return std::vector<OrderBookEntry> a vector of OrderBookEntrys of sales 
+		 */
+		std::vector<OrderBookEntry> matchAsksToBids(std::string product, std::string timestamp);
 };
 #endif

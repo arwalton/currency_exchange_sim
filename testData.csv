@@ -1,0 +1,128 @@
+Test 1 - Ask and bid that exactly match
+2020/03/17 17:01:24.884492,ETH/BTC,ask,10,1.0
+2020/03/17 17:01:24.884492,ETH/BTC,bid,10,1.0
+
+Expected Output:
+price: 10.000000
+amount: 1.000000
+timestamp: 2020/03/17 17:01:24.884492
+product: ETH/BTC
+ordertype: sale
+
+
+Total sales: 1
+
+///////////////////////////////////////
+Test 2 - Ask amount is less than bid amount.
+2020/03/17 17:01:25,ETH/BTC,ask,10,0.5
+2020/03/17 17:01:25,ETH/BTC,bid,10,1.0
+
+Expected Output:
+price: 10.000000
+amount: 0.500000
+timestamp: 2020/03/17 17:01:25
+product: ETH/BTC
+ordertype: sale
+
+
+Total sales: 1
+
+///////////////////////////////////////
+Test 3 - Ask amount is greater than bid amount.
+2020/03/17 17:01:26,ETH/BTC,ask,10,1.5
+2020/03/17 17:01:26,ETH/BTC,bid,10,1.0
+
+Expected Output:
+price: 10.000000
+amount: 1.000000
+timestamp: 2020/03/17 17:01:26
+product: ETH/BTC
+ordertype: sale
+
+
+Total sales: 1
+
+/////////////////////////////////////
+Test 4 - 1 ask, with two smaller bids
+2020/03/17 17:01:27,ETH/BTC,ask,10,1.0
+2020/03/17 17:01:27,ETH/BTC,bid,10,0.5
+2020/03/17 17:01:27,ETH/BTC,bid,10,0.3
+
+Expected Output:
+price: 10.000000
+amount: 0.500000
+timestamp: 2020/03/17 17:01:27
+product: ETH/BTC
+ordertype: sale
+
+
+price: 10.000000
+amount: 0.300000
+timestamp: 2020/03/17 17:01:27
+product: ETH/BTC
+ordertype: sale
+
+
+Total sales: 2
+
+////////////////////////////////////
+Test 5 - 1 ask, with two smaller bids, smaller bid is higher
+2020/03/17 17:01:28,ETH/BTC,ask,10,1.0
+2020/03/17 17:01:28,ETH/BTC,bid,10,0.5
+2020/03/17 17:01:28,ETH/BTC,bid,15,0.3
+
+Expected Output:
+price: 10.000000
+amount: 0.300000
+timestamp: 2020/03/17 17:01:28
+product: ETH/BTC
+ordertype: sale
+
+
+price: 10.000000
+amount: 0.500000
+timestamp: 2020/03/17 17:01:28
+product: ETH/BTC
+ordertype: sale
+
+///////////////////////////////////
+Test 6 - No bids, 1 ask
+2020/03/17 17:01:29,ETH/BTC,ask,10,1.0
+
+Expected Output:
+
+Total sales: 0
+
+////////////////////////////////////
+Test 7 - No asks, 1 bid
+2020/03/17 17:01:30,ETH/BTC,bid,10,1.0
+
+Expected Output:
+
+Total sales: 0
+
+////////////////////////////////////
+Test 8 - Two asks, 1 larger bid
+2020/03/17 17:01:31,ETH/BTC,ask,10,1.0
+2020/03/17 17:01:31,ETH/BTC,ask,10,1.0
+2020/03/17 17:01:31,ETH/BTC,bid,10,2.5
+
+Expected Output:
+
+price: 10.000000
+amount: 1.000000
+timestamp: 2020/03/17 17:01:31
+product: ETH/BTC
+ordertype: sale
+
+
+price: 10.000000
+amount: 1.000000
+timestamp: 2020/03/17 17:01:31
+product: ETH/BTC
+ordertype: sale
+
+
+Total sales: 2
+
+////////////////////////////////////

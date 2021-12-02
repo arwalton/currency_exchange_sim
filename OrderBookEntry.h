@@ -3,7 +3,7 @@
 #pragma once
 #include <string>
 
-enum class OrderBookType{bid, ask, unknown};
+enum class OrderBookType{bid, ask, sale, unknown};
 
 class OrderBookEntry{
     public:
@@ -20,6 +20,14 @@ class OrderBookEntry{
 
         static bool compareByTimestamp(const OrderBookEntry& e1, const OrderBookEntry& e2){
             return e1.timestamp < e2.timestamp;
+        }
+
+        static bool compareByPriceAscending(const OrderBookEntry& e1, const OrderBookEntry& e2){
+            return e1.price < e2.price;
+        }
+
+        static bool compareByPriceDescending(const OrderBookEntry& e1, const OrderBookEntry& e2){
+            return e1.price > e2.price;
         }
 
         std::string toString();

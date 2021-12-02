@@ -9,7 +9,7 @@ class MerkelMain
 {
 	private:
 		bool isRunning;
-		OrderBook orderBook{"20200317.csv"};
+		OrderBook orderBook{"testData.csv"};
 
 		void printMenu();
 		int getUserOption();

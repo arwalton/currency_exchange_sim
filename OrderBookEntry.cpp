@@ -42,11 +42,17 @@ std::string OrderBookEntry::toString(){
 }
 
 std::string OrderBookEntry::obtToString(){
-    if(orderType == OrderBookType::ask){
-        return "ask";
-    }else if(orderType == OrderBookType::bid){
-        return "bid";
-    }else{
-        return "unknown";
+    switch(orderType){
+        case OrderBookType::ask:
+            return "ask";
+            break;
+        case OrderBookType::bid:
+            return "bid";
+            break;
+        case OrderBookType::sale:
+            return "sale";
+            break;
+        default:
+            return "unknown";
     }
 }
