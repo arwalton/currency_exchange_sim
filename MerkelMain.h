@@ -15,7 +15,7 @@ class MerkelMain
 		int getUserOption();
 		void printHelp();
 		void printExchangeStats();
-		void makeOffer();
+		void enterAsk();
 		void makeBid();
 		void printWallet();
 		void advanceTimeframe();

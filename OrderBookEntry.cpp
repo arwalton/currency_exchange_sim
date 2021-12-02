@@ -29,3 +29,24 @@ OrderBookType OrderBookEntry::stringToOrderBookType(std::string s){
     }
     return OrderBookType::unknown;
 }
+
+std::string OrderBookEntry::toString(){
+    std::string entry = "";
+    entry = entry + "price: " + std::to_string(price) + "\n";
+    entry = entry + "amount: " + std::to_string(amount) + "\n";
+    entry = entry + "timestamp: " + timestamp + "\n";
+    entry = entry + "product: " + product + "\n";
+    entry = entry + "ordertype: " + obtToString() + "\n";
+    
+    return entry;
+}
+
+std::string OrderBookEntry::obtToString(){
+    if(orderType == OrderBookType::ask){
+        return "ask";
+    }else if(orderType == OrderBookType::bid){
+        return "bid";
+    }else{
+        return "unknown";
+    }
+}

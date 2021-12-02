@@ -2,6 +2,8 @@
 #include "CSVReader.h"
 #include <map>
 #include <cmath>
+#include <algorithm>
+#include <iostream>
 	
 OrderBook::OrderBook(std::string filename)
 {
@@ -44,6 +46,11 @@ std::vector<OrderBookEntry> OrderBook::getOrders(OrderBookType type,
            }
     }
     return orders_sub;
+}
+
+void OrderBook::insertOrder(OrderBookEntry& order){
+    orders.push_back(order);
+    std::sort(orders.begin(), orders.end(), OrderBookEntry::compareByTimestamp);
 }
 
 double OrderBook::getHighPrice(std::vector<OrderBookEntry>& orders)

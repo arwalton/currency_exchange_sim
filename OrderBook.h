@@ -39,6 +39,13 @@ class OrderBook
 											std::string timestamp);
 
 		/**
+		 * @brief inserts an OrderBookEntry into the OrderBook
+		 * 
+		 * @param order an OrderBookEntry
+		 */
+		void insertOrder(OrderBookEntry& order);
+
+		/**
 		 * @brief Gets the earliest time in our data.
 		 * 
 		 * @return std::string 
