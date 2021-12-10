@@ -3,7 +3,7 @@
 #pragma once
 #include <string>
 
-enum class OrderBookType{bid, ask, sale, unknown};
+enum class OrderBookType{bid, ask, bidsale, asksale, unknown};
 
 class OrderBookEntry{
     public:
@@ -12,7 +12,8 @@ class OrderBookEntry{
             double _amount,
             std::string _timestamp,
             std::string _product,
-            OrderBookType _orderType);
+            OrderBookType _orderType,
+            std::string username = "dataset");
 
         ~OrderBookEntry();
 
@@ -32,6 +33,15 @@ class OrderBookEntry{
 
         std::string toString();
 
+        /**
+         * @brief Allows an OrderBookEntry to use << to go to ostream
+         * 
+         * @param os 
+         * @param obe 
+         * @return std::ostream& 
+         */
+        friend std::ostream& operator<<(std::ostream& os, OrderBookEntry& obe);
+
         std::string obtToString();
 
         double price;
@@ -39,6 +49,6 @@ class OrderBookEntry{
         std::string timestamp;
         std::string product;
         OrderBookType orderType;
-
+        std::string username;
 };
 #endif

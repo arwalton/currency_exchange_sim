@@ -1,0 +1,13 @@
+This is a file to make notes about improvements I can make to this program.
+
+- DONE Add a toString function to OrderBookEntry, so that we can give better feedback on incoming and outgoing orders.
+
+- DONE Add operator overloading for OrderBookEntry
+
+- Add better comments to all functions in the program
+
+- Add an escrow functionality to the wallet currently you can make as many bids and asks as you want, as long as you're able to cover each one individually. There needs to be a way to temporarily hide your currencies in the wallet.
+
+- Program breaks if bids and asks come from the same user. It can be majorly manipulated by a bot.
+
+- Refactor advance timeframe into a new function in MerkelMain. It's too nested. (processSale)

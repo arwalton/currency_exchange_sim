@@ -5,13 +5,15 @@ OrderBookEntry::OrderBookEntry(
     double _amount,
     std::string _timestamp,
     std::string _product,
-    OrderBookType _orderType
+    OrderBookType _orderType,
+    std::string _username
 )
 : price(_price),
   amount(_amount),
   timestamp(_timestamp),
   product(_product),
-  orderType(_orderType)
+  orderType(_orderType),
+  username(_username)
 {
     
 }
@@ -41,6 +43,13 @@ std::string OrderBookEntry::toString(){
     return entry;
 }
 
+std::ostream& operator<<(std::ostream& os, OrderBookEntry& obe)
+{
+    os << obe.toString();
+    return os;
+}
+
+
 std::string OrderBookEntry::obtToString(){
     switch(orderType){
         case OrderBookType::ask:
@@ -49,8 +58,11 @@ std::string OrderBookEntry::obtToString(){
         case OrderBookType::bid:
             return "bid";
             break;
-        case OrderBookType::sale:
-            return "sale";
+        case OrderBookType::bidsale:
+            return "bidsale";
+            break;
+        case OrderBookType::asksale:
+            return "asksale";
             break;
         default:
             return "unknown";
